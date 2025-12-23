@@ -18,11 +18,19 @@ env:
   DEV_TEST_BASH_RUNNER_ENVIRONMENT: "ON"
   DEV_CICD_DEBUG: "${{ inputs.DEV_CICD_DEBUG }}"
   MY_REPORT_PATH: "./logs/gitleaks/gitleaks.sarif"
+  MY_VERSION: "1.1.0"
 
 jobs:
   sast-gitleaks:
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     runs-on: "ubuntu-latest"
     steps:
+
+      - name: "Workflow Version"
+        uses: "echo ${{env.MY_VERSION}}"
 
       - name: "Checkout repository"
         uses: actions/checkout@v6
