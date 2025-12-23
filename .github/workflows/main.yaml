@@ -30,7 +30,8 @@ jobs:
     steps:
 
       - name: "Workflow Version"
-        uses: "echo ${{env.MY_VERSION}}"
+        run: |
+            echo "${{env.MY_VERSION}}"
 
       - name: "Checkout repository"
         uses: actions/checkout@v6
