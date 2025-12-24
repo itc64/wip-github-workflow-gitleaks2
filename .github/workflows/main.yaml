@@ -29,7 +29,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
 
-      - name: "Workflow Version"
+      - name: "Show Workflow Version"
         run: |
             echo "${{env.MY_VERSION}}"
 
@@ -59,13 +59,15 @@ jobs:
 
       - name: "Upload report to CodeQL"
         uses: "github/codeql-action/upload-sarif@v4"
+        continue-on-error: true
         if: always()
         with:
           sarif_file: "${{ env.MY_REPORT_PATH }}"
           category: "secrets"
 
-      - name: "Save report artifact"
+      - name: "Save report as repository artifact"
         uses: actions/upload-artifact@v6
+        continue-on-error: true
         if: always()
         with:
           name: "gitleaks.sarif"
